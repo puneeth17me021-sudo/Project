@@ -1,0 +1,59 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'home/front.css' %}">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="left">
+      Email:msdc.itskills@gmail.com
+    </div>
+    <div class="right">
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="logo">
+      {% if site_branding and site_branding.logo %}
+      <img src="{{ site_branding.logo.url }}" alt="{{ site_branding.site_name|default:'School Of IT Skills' }}">
+      {% else %}
+      <img src="{{ default_logo_url }}" alt="School Of IT Skills">
+      {% endif %}
+      <span>{{ site_branding.site_name|default:"School Of IT Skills" }}</span>
+    </div>
+    <nav>
+      <a href="{% url 'course' %}">Courses</a> 
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'testimonials' %}">Testimonials</a>
+      <a href="{% url 'contact' %}">Contact</a>
+      <a href="{% url 'index' %}">Login</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>School of Information Technology Skills <br>Manipal Skill Development Center, Manipal</h1>
+      <p>
+        
+      </p>
+      <img class="hero-media" src="{{ default_logo_url }}" alt="School of IT Skills">
+      <a href="{% url 'contact' %}" class="btn">Contact Us</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+    </div>
+  </section>
+
+</body>
+</html>
+
+

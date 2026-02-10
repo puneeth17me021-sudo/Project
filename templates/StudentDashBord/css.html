@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Lessons</title>
+<link rel="stylesheet" href="{% static 'studentDashboard/lesson.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1 class="title">CSS Lessons</h1>
+      <a class="btn" href="{% url 'student_courses' %}">Back Courses</a>
+    </div>
+
+    <div class="grid">
+      <div class="box">
+        <h3>Selectors</h3>
+        <video controls>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="box">
+        <h3>Layouts</h3>
+        <video controls>
+          <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <div class="next">
+      <a class="btn" href="{% url 'student_quiz' %}">Next: Quiz</a>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll("video").forEach(function(video) {
+      video.addEventListener("play", function() {
+        sessionStorage.setItem("css", "present");
+      });
+    });
+  </script>
+</body>
+</html>

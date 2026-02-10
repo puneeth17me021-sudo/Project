@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | School of IT Skills</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #005073;
+      --secondary: #00A9E0;
+      --accent: #FF6B35;
+      --light: #F5F9FC;
+      --dark: #1A2B3C;
+      --gray: #6C757D;
+      --white: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background-color: var(--white);
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: var(--white);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      font-size: 28px;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo-subtext {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: -5px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;` 
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a.active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    nav a.active::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background-color: var(--secondary);
+      bottom: -6px;
+      left: 0;
+    }
+
+    .btn-outline {
+      padding: 10px 20px;
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      background: transparent;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0,80,115,0.9), rgba(0,169,224,0.8)),
+      url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1');
+      background-size: cover;
+      color: var(--white);
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .stats {
+      background-color: var(--light);
+      padding: 80px 20px;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .stat-item {
+      background: var(--white);
+      text-align: center;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: var(--white);
+      padding: 40px 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <i class="fas fa-university logo-icon"></i>
+      <div>
+        <div class="logo-text">UDUPI GROUP</div>
+        <div class="logo-subtext">OF INSTITUTIONS</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Shaping Future Innovators & Leaders</h1>
+</section>
+
+<section class="stats">
+  <div class="stats-container">
+    <div class="stat-item">
+      <div class="stat-number" data-value="5">0</div>
+      Colleges
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-value="5000" data-suffix="+">0</div>
+      Students
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-value="200" data-suffix="+">0</div>
+      Faculty
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-value="95" data-suffix="%">0</div>
+      Placement
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Udupi Group of Institutions
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".stat-number");
+
+  const runCounter = (el) => {
+    const target = +el.dataset.value;
+    const suffix = el.dataset.suffix || "";
+    let count = 0;
+    const step = target / 100;
+
+    const timer = setInterval(() => {
+      count += step;
+      if (count >= target) {
+        el.textContent = target + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(count) + suffix;
+      }
+    }, 20);
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        counters.forEach(runCounter);
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(document.querySelector(".stats"));
+});
+</script>
+
+</body>
+</html>
+
+

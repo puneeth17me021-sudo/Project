@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Upload</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/form.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <p><a class="btn" href="{% url 'faculty_dashboard' %}">Back Dashboard</a></p>
+      <h2>Upload New Lesson</h2>
+      {% if message %}<p>{{ message }}</p>{% endif %}
+      {% if error %}<p>{{ error }}</p>{% endif %}
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+          <label for="lesson_title">Lesson Title</label>
+          <input id="lesson_title" name="lesson_title" type="text" placeholder="Lesson title" required>
+        </p>
+
+        <div class="row">
+          <p>
+            <label for="course_id">Course (Under Category)</label>
+            <select id="course_id" name="course_id" required>
+              <option value="">Select course</option>
+              {% for course in courses %}
+              <option value="{{ course.id }}">{{ course.category.name }} > {{ course.title }}</option>
+              {% endfor %}
+            </select>
+          </p>
+          <p>
+            <label for="visibility">Visibility</label>
+            <select id="visibility" name="visibility">
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+              <option value="draft">Draft</option>
+            </select>
+          </p>
+        </div>
+
+        <p>
+          <label for="lesson_file">Upload Lesson File (PDF/Video/PPT/ZIP)</label>
+          <input id="lesson_file" name="lesson_file" type="file">
+        </p>
+
+        <p>
+          <label for="desc">Description</label>
+          <textarea id="desc" name="description" rows="4"></textarea>
+        </p>
+
+        <div class="actions">
+          <button class="btn" type="reset">Discard</button>
+          <button class="btn" type="submit">Save and Publish</button>
+        </div>
+      </form>
+
+      <hr>
+      <h3>Recently Uploaded Lessons</h3>
+      {% for lesson in recent_lessons %}
+      <p>
+        <strong>{{ lesson.course.category.name }} > {{ lesson.course.title }}</strong>:
+        {{ lesson.title }}
+        {% if lesson.lesson_file %}
+        - <a href="{{ lesson.lesson_file.url }}" target="_blank">Open File</a>
+        {% endif %}
+      </p>
+      {% empty %}
+      <p>No lessons uploaded yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

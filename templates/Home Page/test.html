@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - School Of IT Skills</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --bg: linear-gradient(300deg, #ff9f9f, #febf00);
+            --ink: #111;
+            --panel: #fff;
+            --accent: #ffd700;
+            --nav: #101323;
+        }
+        body { background: var(--bg); color: var(--ink); }
+        .navbar { background: rgba(16, 19, 35, 0.95); border-bottom: 2px solid #000; }
+        .nav-link.active { color: #ffd700 !important; font-weight: 700; }
+        .hero, .section-panel { background: rgba(255,255,255,0.9); border-top: 2px solid #000; border-bottom: 2px solid #000; }
+        .box { background: var(--panel); border: 2px solid #000; border-radius: 14px; height: 100%; }
+        .quote { font-size: 2rem; color: #000; opacity: 0.25; }
+        .btn-theme { background: var(--accent); border: 2px solid #000; color: #000; font-weight: 700; }
+        .btn-theme:hover { background: #ffea70; color: #000; border-color: #000; }
+        footer { background: var(--nav); border-top: 2px solid #000; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'home' %}">
+                {% if site_branding and site_branding.logo %}
+                <img src="{{ site_branding.logo.url }}" alt="{{ site_branding.site_name|default:'School Of IT Skills' }}" style="height:34px;width:auto;border-radius:6px;border:1px solid #fff;background:#fff;padding:2px;" class="me-2">
+                {% else %}
+                <i class="bi bi-laptop me-2"></i>
+                {% endif %}
+                {{ site_branding.site_name|default:"School Of IT Skills" }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><i class="bi bi-house"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}"><i class="bi bi-info-circle"></i> About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'course' %}"><i class="bi bi-book"></i> Courses</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'testimonials' %}"><i class="bi bi-chat-quote"></i> Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}"><i class="bi bi-envelope"></i> Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="bi bi-person-circle"></i> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero py-5">
+        <div class="container text-center">
+            <h1 class="display-5 fw-bold">Student Success Stories</h1>
+            <p class="lead">Real feedback from learners who transformed their careers.</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="box p-4">
+                        <div class="quote"><i class="bi bi-quote"></i></div>
+                        <p>"I landed my first developer role after finishing the web bootcamp. The projects were exactly what recruiters asked about."</p>
+                        <h6 class="fw-bold mb-0">Alex Johnson</h6>
+                        <small>Frontend Developer</small>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="box p-4">
+                        <div class="quote"><i class="bi bi-quote"></i></div>
+                        <p>"Data science became practical here. I built portfolio projects that directly helped me in interviews."</p>
+                        <h6 class="fw-bold mb-0">Priya Patel</h6>
+                        <small>ML Engineer</small>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="box p-4">
+                        <div class="quote"><i class="bi bi-quote"></i></div>
+                        <p>"The cybersecurity labs felt real and industry-focused. I passed certification in my first attempt."</p>
+                        <h6 class="fw-bold mb-0">Arshad Mir</h6>
+                        <small>Security Analyst</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-panel py-5">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Ready to Start Your Story?</h2>
+            <a href="{% url 'course' %}" class="btn btn-theme me-2">View Courses</a>
+            <a href="{% url 'bastion' %}" class="btn btn-theme">Enroll Now</a>
+        </div>
+    </section>
+
+    <footer class="text-white py-4">
+        <div class="container d-flex justify-content-between flex-wrap gap-2">
+            <p class="mb-0">&copy; 2026 School Of IT Skills</p>
+            <div>
+                <a href="{% url 'privacy' %}" class="text-white text-decoration-none me-3">Privacy</a>
+                <a href="{% url 'terms' %}" class="text-white text-decoration-none">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

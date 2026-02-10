@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Course</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/course.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>Python Programming for Faculty</h1>
+      <a class="btn" href="{% url 'faculty_courses' %}">Back Courses</a>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Core Concepts</h3>
+        <ul class="list">
+          <li>Syntax, data types, and functions</li>
+          <li>Control flow and modules</li>
+          <li>Reusable scripts</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Faculty Applications</h3>
+        <ul class="list">
+          <li>Automating repetitive tasks</li>
+          <li>Basic data processing</li>
+          <li>Academic report support</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

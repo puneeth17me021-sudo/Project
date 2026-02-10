@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'logi/login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        {% if selected_role %}
+        <p class="role-note">Role: {{ selected_role|title }}</p>
+        {% endif %}
+        <div class="error-msg" id="error-msg">{% if error %}{{ error }}{% endif %}</div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" id="username" name="username" required>
+                <label>Username or Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" name="password" required>
+                <label>Password</label>
+            </div>
+
+            <div class="options">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="{% url 'forgetpass' %}">Forgot Password?</a>
+            </div>
+
+            <button class="login-btn" type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

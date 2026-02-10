@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Modules</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/course.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>Course Modules</h1>
+      <a class="btn" href="{% url 'faculty_dashboard' %}">Back Dashboard</a>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Module 1: Introduction</h3>
+        <ul class="list">
+          <li>What is the course about</li>
+          <li>Learning objectives</li>
+          <li>Expected outcomes</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Module 2: Content Delivery</h3>
+        <ul class="list">
+          <li>Lesson plans</li>
+          <li>Interactive classroom material</li>
+          <li>Assignments and follow-up</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Module 3: Assessment</h3>
+        <ul class="list">
+          <li>Quiz structure</li>
+          <li>Performance metrics</li>
+          <li>Remedial actions</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

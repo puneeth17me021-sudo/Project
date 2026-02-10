@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Page</title>
+  <link rel="stylesheet" href="{% static 'studentDashboard/quiz.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <a class="btn" href="{% url 'student_dashboard' %}">Back Dashboard</a>
+      <h1>Select a Subject Quiz</h1>
+
+      <div class="cards">
+        <div class="card" onclick="loadQuiz('python')">Python</div>
+        <div class="card" onclick="loadQuiz('html')">HTML</div>
+        <div class="card" onclick="loadQuiz('css')">CSS</div>
+        <div class="card" onclick="loadQuiz('js')">JavaScript</div>
+        <div class="card" onclick="loadQuiz('sql')">SQL</div>
+      </div>
+
+      <div id="quiz-area"></div>
+    </div>
+  </div>
+
+  <script>
+    var questions = {
+      python: [
+        { q: "What is Python?", a: "Programming Language", options: ["Snake", "Programming Language", "Game", "Markup"] },
+        { q: "Keyword for function?", a: "def", options: ["func", "def", "function", "lambda"] }
+      ],
+      html: [
+        { q: "HTML stands for?", a: "HyperText Markup Language", options: ["HyperText Makeup Language", "HyperText Markup Language", "Home Tool Markup Language", "None"] },
+        { q: "Tag for image?", a: "img", options: ["image", "pic", "img", "src"] }
+      ],
+      css: [
+        { q: "What is CSS full form?", a: "Cascading Style Sheets", options: ["Cascading Shape Sheets", "Cascading Style Sheets", "Case Styling Sheets", "None"] },
+        { q: "Property to change text color?", a: "color", options: ["font-color", "text-color", "color", "background-color"] }
+      ],
+      js: [
+        { q: "JavaScript file extension?", a: ".js", options: [".java", ".js", ".html", ".css"] },
+        { q: "Function to print output?", a: "console.log()", options: ["print()", "echo()", "console.log()", "log()"] }
+      ],
+      sql: [
+        { q: "SQL stands for?", a: "Structured Query Language", options: ["Simple Query Language", "Structured Query Language", "Sequential Query Language", "None"] },
+        { q: "Command to select data?", a: "SELECT", options: ["GET", "SELECT", "SHOW", "FETCH"] }
+      ]
+    };
+
+    var currentSubject = "";
+    var correctCount = 0;
+
+    function loadQuiz(subject) {
+      currentSubject = subject;
+      correctCount = 0;
+      var quizArea = document.getElementById("quiz-area");
+      quizArea.innerHTML = "";
+
+      questions[subject].forEach(function(item, index) {
+        var div = document.createElement("div");
+        div.className = "question-box";
+        div.innerHTML = "<p>" + (index + 1) + ". " + item.q + "</p>" + item.options.map(function(opt) {
+          return "<button class='option-btn' onclick=\"selectAnswer('" + item.a + "', '" + opt + "', this)\">" + opt + "</button>";
+        }).join(" ");
+        quizArea.appendChild(div);
+      });
+
+      var submitBtn = document.createElement("button");
+      submitBtn.className = "btn";
+      submitBtn.textContent = "Submit Quiz";
+      submitBtn.onclick = submitQuiz;
+      quizArea.appendChild(submitBtn);
+    }
+
+    function selectAnswer(correct, chosen, btn) {
+      if (btn.disabled) return;
+      if (correct === chosen) {
+        correctCount++;
+        btn.style.background = "#4caf50";
+        btn.style.color = "#fff";
+      } else {
+        btn.style.background = "#f44336";
+        btn.style.color = "#fff";
+      }
+      btn.parentNode.querySelectorAll("button").forEach(function(b) { b.disabled = true; });
+    }
+
+    function submitQuiz() {
+      var total = questions[currentSubject].length;
+      var progress = Math.round((correctCount / total) * 100);
+      sessionStorage.setItem(currentSubject + "Progress", progress);
+      window.location.href = "{% url 'student_progress' %}";
+    }
+  </script>
+</body>
+</html>

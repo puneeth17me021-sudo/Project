@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Tracker</title>
+  <link rel="stylesheet" href="{% static 'studentDashboard/attendance.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <a class="btn" href="{% url 'student_dashboard' %}">Back Dashboard</a>
+      <h2>Attendance Page</h2>
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Course</th>
+          <th>Present Days</th>
+          <th>Last Attended</th>
+        </tr>
+        {% for row in rows %}
+        <tr>
+          <td>{{ row.category }}</td>
+          <td>{{ row.course }}</td>
+          <td>{{ row.present_days }}</td>
+          <td>{% if row.last_attended %}{{ row.last_attended }}{% else %}-{% endif %}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4">No attendance yet. Enroll and enter a course first.</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Courses</title>
+    <link rel="stylesheet" href="{% static 'studentDashboard/dashboard.css' %}">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <h2>Student</h2>
+            <ul class="menu">
+                <li><a href="{% url 'student_dashboard' %}">Home</a></li>
+                <li><a class="active" href="{% url 'student_courses' %}">Courses</a></li>
+                <li><a href="{% url 'student_progress' %}">Progress</a></li>
+                <li><a href="{% url 'student_attendance' %}">Attendance</a></li>
+                <li><a href="{% url 'student_quiz' %}">Quiz</a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <div class="topbar">
+                <h1>Course Categories</h1>
+                <a class="btn" href="{% url 'student_attendance' %}">View Attendance</a>
+            </div>
+
+            {% if notice %}<p>{{ notice }}</p>{% endif %}
+
+            {% for category in categories %}
+            <h2>{{ category.name }}</h2>
+            <section class="cards">
+                {% for course in category.courses.all %}
+                <article class="card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description|default:"No description yet." }}</p>
+                    <p>Level: {{ course.get_level_display }}</p>
+                    <p>Students Enrolled: {{ course.enrollment_count }}</p>
+                    <p>Uploaded Lessons: {{ course.lesson_count }}</p>
+
+                    {% if course.lessons.all %}
+                    <p><strong>Lesson Files:</strong></p>
+                    {% for lesson in course.lessons.all|slice:":3" %}
+                    <p>
+                        {{ lesson.title }}
+                        {% if lesson.lesson_file %}
+                        - <a href="{{ lesson.lesson_file.url }}" target="_blank">Open</a>
+                        {% else %}
+                        - No file
+                        {% endif %}
+                    </p>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if course.id in enrolled_ids %}
+                    <a class="btn" href="{% url 'student_enter_course' course.id %}">Enter Course</a>
+                    {% else %}
+                    <form method="post" action="{% url 'student_enroll_course' course.id %}">
+                        {% csrf_token %}
+                        <button class="btn" type="submit">Enroll</button>
+                    </form>
+                    {% endif %}
+                </article>
+                {% empty %}
+                <article class="card">
+                    <h3>No courses</h3>
+                    <p>This category has no courses yet.</p>
+                </article>
+                {% endfor %}
+            </section>
+            {% empty %}
+            <p>No categories available. Contact faculty/admin.</p>
+            {% endfor %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Course</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/form.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <p><a class="btn" href="{% url 'faculty_dashboard' %}">Back Dashboard</a></p>
+      <h2>Create New Course</h2>
+      {% if message %}<p>{{ message }}</p>{% endif %}
+      {% if error %}<p>{{ error }}</p>{% endif %}
+      <form method="post">
+        {% csrf_token %}
+        <p>
+          <label for="title">Course Title</label>
+          <input id="title" name="title" type="text" placeholder="Enter course title" required>
+        </p>
+        <p>
+          <label for="instructor">Instructor Name</label>
+          <input id="instructor" type="text" value="{{ request.user.get_full_name|default:request.user.username }}" readonly>
+        </p>
+
+        <div class="row">
+          <p>
+            <label for="category_id">Category</label>
+            <select id="category_id" name="category_id">
+              <option value="">Select existing category</option>
+              {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </p>
+          <p>
+            <label for="new_category_name">Create New Category</label>
+            <input id="new_category_name" name="new_category_name" type="text" placeholder="New category name">
+          </p>
+        </div>
+
+        <div class="row">
+          <p>
+            <label for="level">Course Level</label>
+            <select id="level" name="level">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </p>
+          <p>
+            <label for="duration_hours">Duration (Hours)</label>
+            <input id="duration_hours" name="duration_hours" type="number" min="0" value="0">
+          </p>
+        </div>
+
+        <p>
+          <label for="description">Course Description</label>
+          <textarea id="description" name="description" rows="4"></textarea>
+        </p>
+
+        <div class="actions">
+          <button class="btn" type="reset">Reset</button>
+          <button class="btn" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

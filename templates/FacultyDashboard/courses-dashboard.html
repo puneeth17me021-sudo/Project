@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Dashboard</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/dashboard.css' %}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Faculty</h2>
+      <ul class="menu">
+        <li><a class="active" href="{% url 'faculty_dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'faculty_courses' %}">Available Courses</a></li>
+        <li><a href="{% url 'faculty_course_modules' %}">Course Modules</a></li>
+        <li><a href="{% url 'faculty_course_creation' %}">Course Creation</a></li>
+        <li><a href="{% url 'faculty_lesson_upload' %}">Lesson Upload</a></li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1>Faculty Dashboard</h1>
+        <a class="btn" href="{% url 'index' %}">Role Select</a>
+      </div>
+
+      <section class="cards">
+        <article class="card">
+          <h3>Summary</h3>
+          <p>Categories: {{ category_count }}</p>
+          <p>Courses: {{ course_count }}</p>
+          <p>Lessons: {{ lesson_count }}</p>
+          <p>Enrollments: {{ enrollment_count }}</p>
+        </article>
+        <article class="card">
+          <h3>Manage Courses</h3>
+          <p>Review and navigate all active courses.</p>
+          <a class="btn" href="{% url 'faculty_courses' %}">Open</a>
+        </article>
+        <article class="card">
+          <h3>Create Course</h3>
+          <p>Add new courses and define curriculum structure.</p>
+          <a class="btn" href="{% url 'faculty_course_creation' %}">Open</a>
+        </article>
+        <article class="card">
+          <h3>Upload Lessons</h3>
+          <p>Upload and publish lesson content.</p>
+          <a class="btn" href="{% url 'faculty_lesson_upload' %}">Open</a>
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

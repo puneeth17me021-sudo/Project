@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to LMS</title>
+    <link rel="stylesheet" href="{% static 'logi/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1><b>Select Your Role</b></h1>
+        <form method="POST" class="role">
+            {% csrf_token %}
+            <div class="role-card admin">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Admin">
+                <h2>Admin</h2>
+                <p>Manage users, system settings and reports</p>
+                <button type="submit" name="role" value="admin">Select</button>
+            </div>
+
+            <div class="role-card faculty">
+                <img src="https://cdn-icons-png.flaticon.com/512/1995/1995574.png" alt="Faculty">
+                <h2>Faculty</h2>
+                <p>Access courses, assignments and results</p>
+                <button type="submit" name="role" value="faculty">Select</button>
+            </div>
+
+            <div class="role-card student">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Student">
+                <h2>Student</h2>
+                <p>Access courses, assignments and results</p>
+                <button type="submit" name="role" value="student">Select</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

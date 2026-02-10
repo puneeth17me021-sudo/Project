@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Analysis Course</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/course.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>Data Analysis for Faculty</h1>
+      <a class="btn" href="{% url 'faculty_courses' %}">Back Courses</a>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <h3>Data Foundations</h3>
+        <ul class="list">
+          <li>Data cleaning and statistics</li>
+          <li>Exploratory data analysis</li>
+          <li>Structured reporting</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Tools</h3>
+        <ul class="list">
+          <li>Spreadsheets and dashboards</li>
+          <li>Pandas and NumPy basics</li>
+          <li>Charts for presentation</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

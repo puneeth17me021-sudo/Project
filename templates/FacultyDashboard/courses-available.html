@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Courses</title>
+  <link rel="stylesheet" href="{% static 'facultyDashboard/course.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>Available Courses</h1>
+      <a class="btn" href="{% url 'faculty_dashboard' %}">Back Dashboard</a>
+    </div>
+    {% for category in categories %}
+    <h2>{{ category.name }}</h2>
+    <div class="grid">
+      {% for course in category.courses.all %}
+      <article class="card">
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description|default:"No description yet." }}</p>
+        <p>Level: {{ course.get_level_display }}</p>
+        <p>Duration: {{ course.duration_hours }} hours</p>
+        <p>Students: {{ course.enrollment_count }} | Attendance entries: {{ course.attendance_count }}</p>
+        <p>Lessons: {{ course.lesson_count }}</p>
+      </article>
+      {% empty %}
+      <article class="card">
+        <h3>No courses in this category</h3>
+        <p>Add courses from Course Creation.</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% empty %}
+    <p>No categories available yet. Create one in Course Creation.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

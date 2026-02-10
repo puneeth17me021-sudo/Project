@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Information - School Of IT Skills</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #005073;
+            --secondary: #879328;
+            --accent: #ff6a00;
+        }
+        
+        .hero-enroll {
+            background: linear-gradient(rgba(0, 80, 115, 0.9), rgba(0, 80, 115, 0.8)), 
+                        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .enrollment-card {
+            transition: transform 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .enrollment-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transform-origin: center bottom;
+            position: relative;
+        }
+        
+        .course-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .course-card.selected {
+            border-color: var(--accent);
+            background-color: rgba(255, 106, 0, 0.05);
+            transform: translateY(-5px);
+            animation: pulse 2s infinite;
+        }
+        
+        /* Add a pulsing animation for selected cards */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 5px 15px rgba(255, 106, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 5px 25px rgba(255, 106, 0, 0.4);
+            }
+            100% {
+                box-shadow: 0 5px 15px rgba(255, 106, 0, 0.2);
+            }
+        }
+        
+        /* Add a tooltip-like effect */
+        .course-card::after {
+            content: "Click to select";
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 100;
+        }
+        
+        .course-card:hover::after {
+            opacity: 1;
+        }
+        
+        .icon-large {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            padding: 12px 30px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: #6d7a20;
+            border-color: #6d7a20;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(135, 147, 40, 0.3);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            font-weight: 500;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e55e00;
+            border-color: #e55e00;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 106, 0, 0.3);
+        }
+        
+        .text-primary {
+            color: var(--primary) !important;
+        }
+        
+        .text-accent {
+            color: var(--accent) !important;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.25rem rgba(135, 147, 40, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .step-complete {
+            background-color: var(--secondary);
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: var(--primary);
+            transform: translateX(-50%);
+        }
+        
+        /* Scroll to form indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(255, 106, 0, 0.3);
+        }
+        
+        .scroll-indicator.show {
+            opacity: 1;
+        }
+        
+        .scroll-indicator:hover {
+            background-color: #e55e00;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .course-card::after {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                bottom: -30px;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="bi bi-laptop"></i> School Of IT Skills
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-enroll">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Start Your IT Journey Today</h1>
+                    <p class="lead mb-4">Join thousands of successful students who transformed their careers with our industry-leading courses</p>
+                    <a href="#enrollment-form" class="btn btn-accent btn-lg">
+                        <i class="bi bi-pencil-square"></i> Begin Enrollment
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold text-primary mb-4">Why Enroll With Us?</h2>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-check-circle-fill text-accent" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h5>Industry-Recognized Certificates</h5>
+                            <p class="text-muted">Receive certificates that are valued by top tech companies worldwide.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-check-circle-fill text-accent" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h5>Expert-Led Training</h5>
+                            <p class="text-muted">Learn from industry professionals with 10+ years of experience.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="me-3">
+                            <i class="bi bi-check-circle-fill text-accent" style="font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h5>Job Placement Support</h5>
+                            <p class="text-muted">Get career guidance and connect with our 500+ hiring partners.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card enrollment-card">
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold text-primary mb-4">Enrollment Process</h4>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="step-indicator">1</div>
+                                <div class="ms-3">
+                                    <h5>Submit Information</h5>
+                                    <p class="text-muted mb-0">Fill out the enrollment form with your details.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="step-indicator">2</div>
+                                <div class="ms-3">
+                                    <h5>Course Selection</h5>
+                                    <p class="text-muted mb-0">Choose your desired course from our offerings.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="step-indicator">3</div>
+                                <div class="ms-3">
+                                    <h5>Schedule Consultation</h5>
+                                    <p class="text-muted mb-0">Book a free counseling session with our advisors.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <div class="step-indicator">4</div>
+                                <div class="ms-3">
+                                    <h5>Start Learning</h5>
+                                    <p class="text-muted mb-0">Get access to course materials and begin your journey.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Selection -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold text-primary mb-3">Select Your Course</h2>
+            <p class="text-center text-muted mb-5">
+                <i class="bi bi-mouse-fill text-accent me-2"></i>
+                <strong>Hover over any course card to preview it</strong> | 
+                <strong class="text-accent">Click to select</strong> | 
+                Then fill out the form below
+            </p>
+            
+            <!-- Animated instruction indicator -->
+            <div class="alert alert-info text-center mb-4" role="alert">
+                <div class="d-flex align-items-center justify-content-center flex-wrap">
+                    <i class="bi bi-arrow-down text-primary fs-4 me-3"></i>
+                    <span><strong>Step 1:</strong> Select your course below</span>
+                    <i class="bi bi-arrow-right text-primary fs-4 mx-3"></i>
+                    <span><strong>Step 2:</strong> Fill the enrollment form</span>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Course 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card course-card p-4 h-100" onclick="selectCourse('web-dev')">
+                        <div class="text-center">
+                            <i class="bi bi-code-slash icon-large"></i>
+                            <h5 class="fw-bold text-primary">Web Development Bootcamp</h5>
+                            <p class="text-muted">Learn HTML, CSS, JavaScript and build responsive websites from scratch.</p>
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="bi bi-clock"></i> 40 hours
+                                    <i class="bi bi-person ms-3"></i> 12,500 students
+                                </small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0 text-accent">3 month</span>
+                                <span class="h5 mb-0 text-accent">â‚¹4,500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card course-card p-4 h-100" onclick="selectCourse('data-science')">
+                        <div class="text-center">
+                            <i class="bi bi-graph-up icon-large"></i>
+                            <h5 class="fw-bold text-primary">Data Science Fundamentals</h5>
+                            <p class="text-muted">Master Python, data analysis, visualization, and machine learning basics.</p>
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="bi bi-clock"></i> 3 months
+                                    <i class="bi bi-person ms-3"></i> 8,200 students
+                                </small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0 text-accent">â‚¹5,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card course-card p-4 h-100" onclick="selectCourse('cybersecurity')">
+                        <div class="text-center">
+                            <i class="bi bi-shield-lock icon-large"></i>
+                            <h5 class="fw-bold text-primary">Cybersecurity Essentials</h5>
+                            <p class="text-muted">Protect networks and systems from threats with hands-on security training.</p>
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="bi bi-clock"></i> 3 months
+                                    <i class="bi bi-person ms-3"></i> 5,300 students
+                                </small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0 text-accent">â‚¹3500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card course-card p-4 h-100" onclick="selectCourse('digital-marketing')">
+                        <div class="text-center">
+                            <i class="bi bi-megaphone icon-large"></i>
+                            <h5 class="fw-bold text-primary">AI: Fundamentals</h5>
+                            <p class="text-muted">Learn Fundamentals of AI from scratch to Advance</p>
+                            <div class="mb-3">
+                                <small class="text-muted">
+                                    <i class="bi bi-clock"></i> 3 months
+                                    <i class="bi bi-person ms-3"></i> 15,000 students
+                                </small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 mb-0 text-accent">â‚¹4,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enrollment Form -->
+    <section id="enrollment-form" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card enrollment-card">
+                        <div class="card-body p-4">
+                            <h3 class="fw-bold text-primary mb-4 text-center">Enrollment Information Form</h3>
+                            
+                            <form id="enrollmentForm">
+                                <div class="mb-4">
+                                    <h5 class="fw-bold text-primary mb-3">Personal Information</h5>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="firstName" class="form-label">First Name *</label>
+                                            <input type="text" class="form-control" id="firstName" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="lastName" class="form-label">Last Name *</label>
+                                            <input type="text" class="form-control" id="lastName" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">Email Address *</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="phone" class="form-label">Phone Number *</label>
+                                            <input type="tel" class="form-control" id="phone" required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <textarea class="form-control" id="address" rows="2"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <h5 class="fw-bold text-primary mb-3">Course Selection</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label">Selected Course *</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="selectedCourse" readonly required>
+                                            <button type="button" class="btn btn-primary" onclick="showCourseModal()">
+                                                <i class="bi bi-search"></i> Browse Courses
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="startDate" class="form-label">Preferred Start Date *</label>
+                                        <input type="date" class="form-control" id="startDate" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- Submit Button with proper styling -->
+                                <div class="d-grid mt-4">
+                                    <button type="submit" class="btn btn-accent btn-lg">
+                                        <i class="bi bi-check-circle-fill me-2"></i> Submit Enrollment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to form button -->
+    <div class="scroll-indicator" id="scrollToForm" onclick="scrollToForm()">
+        <i class="bi bi-arrow-down"></i>
+    </div>
+
+    <script>
+        let selectedCourse = '';
+        let selectionMade = false;
+        
+        function selectCourse(courseId) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Set selected course
+            switch(courseId) {
+                case 'web-dev':
+                    selectedCourse = 'Web Development Bootcamp';
+                    break;
+                case 'data-science':
+                    selectedCourse = 'Data Science Fundamentals';
+                    break;
+                case 'cybersecurity':
+                    selectedCourse = 'Cybersecurity Essentials';
+                    break;
+                case 'digital-marketing':
+                    selectedCourse = 'AI Fundamentals';
+                    break;
+            }
+            
+            // Update form field
+            document.getElementById('selectedCourse').value = selectedCourse;
+            
+            // Show confirmation message
+            if (!selectionMade) {
+                // Create and show a temporary success message
+                const successAlert = document.createElement('div');
+                successAlert.className = 'alert alert-success alert-dismissible fade show text-center';
+                successAlert.innerHTML = `
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <strong>Course selected!</strong> You've chosen "${selectedCourse}". Now please fill out the enrollment form below.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                
+                // Insert after the course selection section
+                const courseSection = document.querySelector('.py-5');
+                courseSection.insertAdjacentElement('afterend', successAlert);
+                
+                // Auto-dismiss after 5 seconds
+                setTimeout(() => {
+                    successAlert.classList.remove('show');
+                    setTimeout(() => successAlert.remove(), 150);
+                }, 5000);
+                
+                selectionMade = true;
+            }
+            
+            // Scroll to form smoothly
+            setTimeout(() => {
+                document.getElementById('enrollment-form').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 800);
+        }
+        
+        function showCourseModal() {
+            alert("Please select a course from the options above by clicking on it.");
+            // Scroll back to courses
+            document.querySelector('.py-5').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+        
+        function chooseCourse(courseName) {
+            selectedCourse = courseName;
+            document.getElementById('selectedCourse').value = selectedCourse;
+            
+            // Highlight corresponding card
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.classList.remove('selected');
+                if (card.textContent.includes(courseName)) {
+                    card.classList.add('selected');
+                }
+            });
+        }
+        
+        // Form submission
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedCourse) {
+                // Highlight course section
+                const courseSection = document.querySelector('.py-5');
+                courseSection.style.animation = 'none';
+                setTimeout(() => {
+                    courseSection.style.animation = 'pulse 2s';
+                }, 10);
+                
+                // Show error message
+                alert('âš ï¸ Please select a course first!\n\nHover over the course cards above and click on one to select it.');
+                
+                // Scroll back to courses
+                courseSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                return;
+            }
+            
+            // Here you would typically send data to server
+            // For demo purposes, we'll show a success message
+            
+            const formData = {
+                name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                course: selectedCourse,
+                startDate: document.getElementById('startDate').value
+            };
+            
+            // Show success message
+            alert(`Thank you, ${formData.name}!\n\nYour enrollment request for "${formData.course}" has been submitted.\n\nOur enrollment advisor will contact you at ${formData.email} within 24 hours to complete the enrollment process.\n\nPreferred start date: ${formData.startDate}`);
+            
+            // Reset form
+            this.reset();
+            document.querySelectorAll('.course-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            selectedCourse = '';
+            selectionMade = false;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').min = today;
+        
+        // Scroll to form function
+        function scrollToForm() {
+            document.getElementById('enrollment-form').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Show/hide scroll indicator based on scroll position
+        window.addEventListener('scroll', function() {
+            const scrollIndicator = document.getElementById('scrollToForm');
+            const courseSection = document.querySelector('.py-5');
+            const courseSectionBottom = courseSection.offsetTop + courseSection.offsetHeight;
+            
+            if (window.scrollY > courseSectionBottom - 200) {
+                scrollIndicator.classList.add('show');
+            } else {
+                scrollIndicator.classList.remove('show');
+            }
+        });
+    </script> 
+
+    <footer class="bg-primary text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-laptop"></i> School Of IT Skills</h5>
+                    <p class="mb-0">Transforming careers through technology education</p>
+                </div>
+                <div class="col-md-6">
+                    <nav class="nav justify-content-end">
+                        <a class="nav-link text-white" href="{% url 'about' %}">About</a>
+                        <a class="nav-link text-white" href="{% url 'course' %}">Courses</a>  
+                        <a class="nav-link text-white" href="{% url 'testimonials' %}">Testimonials</a>
+                        <a class="nav-link text-white" href="{% url 'contact' %}">Contact</a>
+                        <a class="nav-link text-white" href="{% url 'index' %}">Login</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer> 
+</body>
+</html>
+
+
