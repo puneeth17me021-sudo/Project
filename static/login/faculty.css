@@ -1,0 +1,132 @@
+:root {
+    --glass-bg: rgba(179, 141, 141, 0.08);
+    --glass-border: rgba(201, 216, 146, 0.18);
+    --text-light: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --accent: #e6b566;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top left, #0f2027, #203a43, #000000);
+    overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background: rgba(121, 38, 189, 0.55);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: var(--text-light) !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-muted) !important;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent) !important;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 260px;
+    position: fixed;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(206, 201, 128, 0.15),
+        rgba(230, 116, 116, 0.6)
+    );
+    backdrop-filter: blur(18px);
+    border-right: 1px solid var(--glass-border);
+    padding-top: 25px;
+}
+
+.sidebar a {
+    color: var(--text-muted);
+    padding: 14px 28px;
+    display: block;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.6px;
+    position: relative;
+    transition: all 0.35s ease;
+}
+
+.sidebar a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 60%;
+    background: var(--accent);
+    transform: translateY(-50%);
+    transition: width 0.35s;
+}
+
+.sidebar a:hover::before {
+    width: 4px;
+}
+
+.sidebar a:hover {
+    color: var(--text-light);
+    padding-left: 36px;
+    background: rgba(146, 91, 91, 0.08);
+}
+
+/* ===== CONTENT ===== */
+.content {
+    margin-left: 260px;
+    margin-top: 56px;
+    padding: 35px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-light);
+    letter-spacing: 1px;
+}
+
+p {
+    color: var(--text-muted);
+}
+
+/* ===== GLASS CARD ===== */
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(92, 80, 80, 0.45);
+    color: var(--text-light);
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.8px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}

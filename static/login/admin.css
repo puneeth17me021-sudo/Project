@@ -1,0 +1,114 @@
+:root {
+    --sidebar-width: 260px;
+    --bg-dark: #020617;
+    --bg-panel: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.15);
+    --text-light: #e5e7eb;
+    --text-muted: #9ca3af;
+    --accent: #38bdf8;
+    --danger: #ef4444;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+/* ===== TOP NAVBAR ===== */
+.topbar {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: var(--bg-panel);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.topbar h5 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: var(--danger);
+    color: #fff;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - 56px);
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 14px 28px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    color: var(--text-light);
+    background: rgba(56, 189, 248, 0.12);
+    border-left: 4px solid var(--accent);
+    padding-left: 24px;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main {
+    margin-top: 56px;
+    margin-left: var(--sidebar-width);
+    height: calc(100vh - 56px);
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    border-radius: 16px;
+    color: var(--text-light);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+}

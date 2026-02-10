@@ -1,0 +1,67 @@
+body {
+  background-color: #080808;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+}
+
+h1 {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h2 {
+  color: #f2f5f9;
+  font-weight: 600;
+  border-bottom: 2px solid #007bff;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Table Styling */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #e5ecf3;
+  color: rgb(13, 12, 12);
+}
+
+tbody tr:hover {
+  background-color: #4e5155;
+  transition: 0.3s;
+}
+
+/* Faculty Card Styling */
+.card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(248, 26, 26, 0.15);
+}
+
+.card-title {
+  font-weight: bold;
+  color: #9f2706;
+}
+
+.card-subtitle {
+  font-style: italic;
+}
+
+.card-link {
+  color: #050607;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}

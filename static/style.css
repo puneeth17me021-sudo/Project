@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #111827, #1f2937);
+    color: #f9fafb;
+}
+
+.container {
+    width: min(800px, 94vw);
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid #374151;
+    border-radius: 14px;
+    padding: 28px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.role-card {
+    border: 1px solid #4b5563;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.role-card button {
+    margin-top: 8px;
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    background: #2563eb;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media (max-width: 760px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+}

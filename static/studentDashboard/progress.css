@@ -1,0 +1,72 @@
+:root {
+  --bg-gradient: linear-gradient(300deg, #ff9f9f, #febf00);
+  --panel: #ffffff;
+  --text: #111111;
+  --accent: #ffd700;
+  --border: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  color: var(--text);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.btn {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.progress-container {
+  width: 100%;
+  background: #e3e3e3;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  height: 28px;
+  width: 0;
+  color: #fff;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+}
+
+#python-bar { background: #4caf50; }
+#html-bar { background: #f44336; }
+#css-bar { background: #2196f3; }
+#js-bar { background: #ff9800; }
+#sql-bar { background: #9c27b0; }

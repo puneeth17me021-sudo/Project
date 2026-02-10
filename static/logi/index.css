@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(300deg, #ff9f9f, #febf00);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+h1 {
+    color: #000000;
+    margin-bottom: 30px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.role {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.role-card {
+    background: #ffffff;
+    width: 280px;
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid #000000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-10px);
+}
+
+.role-card img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.role-card h2 {
+    margin-bottom: 10px;
+}
+
+.role-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.role-card button {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.admin button {
+    background: #ffd700;
+}
+
+.faculty button {
+    background: #ffd700;
+}
+
+.student button {
+    background: #ffd700;
+}
+
+.role-card button:hover {
+    background: #ffea70;
+    transform: translateY(-2px);
+}

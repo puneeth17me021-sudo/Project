@@ -1,0 +1,65 @@
+:root {
+  --bg-gradient: linear-gradient(300deg, #ff9f9f, #febf00);
+  --panel: #ffffff;
+  --text: #111111;
+  --accent: #ffd700;
+  --border: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 14px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  background: var(--accent);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: var(--accent);
+}
+
+.tick {
+  color: green;
+  font-size: 20px;
+  font-weight: 700;
+}

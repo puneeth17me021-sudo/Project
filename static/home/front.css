@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+    color: #333;
+}
+
+.top-bar {
+    background: #d4d1d1;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    border-bottom: 1px solid #bdb7b7;
+}
+
+.top-bar .right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #ff6a00;
+    font-weight: 600;
+}
+
+header {
+    background: #0b1437;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo img {
+    height: 36px;
+    width: auto;
+    border-radius: 6px;
+    border: 1px solid #ffffff;
+    background: #ffffff;
+    padding: 2px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #ff6a00;
+}
+
+.hero {
+    height: 900px;
+    background: linear-gradient(rgba(11, 20, 55, 0.55), rgba(11, 20, 55, 0.55)),
+        url("/static/home/images/2025-10-27.webp") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    color: #fff;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-media {
+    display: block;
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    margin: 16px 0 20px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: #ff6a00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background: #e65c00;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.feature {
+    padding: 40px 25px;
+    text-align: center;
+    color: #fff;
+}
+
+.feature.orange {
+    background: #ff6a00;
+}
+
+.feature.dark {
+    background: #0b1437;
+}
+
+.feature h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.feature p {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 0 30px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    .btn {
+        color: teal;
+    }
+}

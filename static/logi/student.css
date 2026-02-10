@@ -1,0 +1,85 @@
+body {
+    background: linear-gradient(300deg, #ff9f9f, #febf00);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 2px solid #000000;
+}
+
+h1 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #000000;
+}
+
+h2 {
+    color: #000000;
+    font-weight: 700;
+    border-bottom: 2px solid #000000;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+table {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 2px solid #000000;
+}
+
+thead {
+    background-color: #ffd700;
+    color: #000000;
+}
+
+tbody tr:hover {
+    background-color: #fff2ad;
+    transition: 0.3s;
+}
+
+.card {
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    transition: transform 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+    font-weight: 700;
+    color: #000000;
+}
+
+.card-subtitle {
+    font-style: italic;
+}
+
+.card-link {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+.btn-danger {
+    background: #ffd700;
+    border: 2px solid #000000;
+    color: #000000;
+    font-weight: 700;
+}
+
+.btn-danger:hover {
+    background: #ffea70;
+    color: #000000;
+    border-color: #000000;
+}

@@ -1,0 +1,111 @@
+:root {
+    --sidebar-width: 260px;
+    --bg-main: linear-gradient(300deg, #ff9f9f, #febf00);
+    --panel: #ffffff;
+    --ink: #000000;
+    --muted: #333333;
+    --accent: #ffd700;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-main);
+    color: var(--ink);
+    overflow: hidden;
+}
+
+.topbar {
+    height: 56px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.topbar h5 {
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logout-btn {
+    background: var(--accent);
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #ffea70;
+    transform: translateY(-1px);
+}
+
+.sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - 56px);
+    background: rgba(255, 255, 255, 0.92);
+    border-right: 2px solid var(--ink);
+    padding-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 14px 28px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    color: var(--ink);
+    background: rgba(255, 215, 0, 0.35);
+    border-left: 4px solid var(--ink);
+    padding-left: 24px;
+}
+
+.main {
+    margin-top: 56px;
+    margin-left: var(--sidebar-width);
+    height: calc(100vh - 56px);
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.main h4 {
+    font-weight: 700;
+}
+
+.card {
+    background: var(--panel);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    color: var(--ink);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+}
