@@ -1,0 +1,37 @@
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('course/', views.course, name='course'),
+    path('contact/', views.contact, name='contact'),
+    path('testimonials/', views.testimonials, name='testimonials'),
+    path('bastion/', views.bastion, name='bastion'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('terms/', views.terms, name='terms'),
+    path('select-role/', views.index, name='index'),
+    path('login/', views.login_page, name='login'),
+    path('forgetpass/', views.forget_password, name='forgetpass'),
+    path('dashboard/admin/', views.admin_dashboard, name='admin_dashboard'),
+    path('dashboard/faculty/', views.faculty_dashboard, name='faculty_dashboard'),
+    path('dashboard/faculty/courses/', views.faculty_courses, name='faculty_courses'),
+    path('dashboard/faculty/courses/web-development/', views.faculty_web_course, name='faculty_web_course'),
+    path('dashboard/faculty/courses/python/', views.faculty_python_course, name='faculty_python_course'),
+    path('dashboard/faculty/courses/data-analysis/', views.faculty_data_course, name='faculty_data_course'),
+    path('dashboard/faculty/course-modules/', views.faculty_course_modules, name='faculty_course_modules'),
+    path('dashboard/faculty/course-creation/', views.faculty_course_creation, name='faculty_course_creation'),
+    path('dashboard/faculty/lesson-upload/', views.faculty_lesson_upload, name='faculty_lesson_upload'),
+    path('dashboard/student/', views.student_dashboard, name='student_dashboard'),
+    path('dashboard/student/courses/', views.student_courses, name='student_courses'),
+    path('dashboard/student/courses/<int:course_id>/enroll/', views.student_enroll_course, name='student_enroll_course'),
+    path('dashboard/student/courses/<int:course_id>/enter/', views.student_enter_course, name='student_enter_course'),
+    path('dashboard/student/python/', views.student_python, name='student_python'),
+    path('dashboard/student/sql/', views.student_sql, name='student_sql'),
+    path('dashboard/student/html/', views.student_html, name='student_html'),
+    path('dashboard/student/css/', views.student_css, name='student_css'),
+    path('dashboard/student/quiz/', views.student_quiz, name='student_quiz'),
+    path('dashboard/student/progress/', views.student_progress, name='student_progress'),
+    path('dashboard/student/attendance/', views.student_attendance, name='student_attendance'),
+]
